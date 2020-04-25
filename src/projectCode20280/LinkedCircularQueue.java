@@ -9,40 +9,59 @@ package projectCode20280;
  */
 
 public class LinkedCircularQueue<E> implements Queue<E> {
+	CircularlyLinkedList<E> list= new CircularlyLinkedList<E> ();
+	
+	public LinkedCircularQueue() {
+	}
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		LinkedCircularQueue<Integer> que = new LinkedCircularQueue<Integer>();
+		for(int i=0;i<5;i++)
+			que.enqueue(i);
+			
+			System.out.println("Size : "+que.size());
+			System.out.println("Top of queue : "+que.first());
+			System.out.println("Dequeue : "+que.dequeue());
+			System.out.println("Dequeue again : "+que.dequeue());
+			System.out.println("Size : "+que.size());
+			System.out.println("Top of queue : "+que.first());
+			System.out.println("Size before rotation : "+que.size());
+			que.rotate();
+			System.out.println("Top of queue after rotation : "+que.first());
+			System.out.println("Size after rotation : "+que.size());
+			
 
 	}
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		return list.size();
 	}
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		return list.isEmpty();
 	}
 
 	@Override
 	public void enqueue(E e) {
-		// TODO Auto-generated method stub
+		list.addLast(e);
 
 	}
 
 	@Override
 	public E first() {
-		// TODO Auto-generated method stub
-		return null;
+		return list.get(0);
 	}
 
 	@Override
 	public E dequeue() {
-		// TODO Auto-generated method stub
-		return null;
+
+		return list.removeFirst();
+	}
+	
+	public void rotate() {
+		list.rotate();
 	}
 
 }

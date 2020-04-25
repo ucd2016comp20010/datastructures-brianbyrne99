@@ -1,40 +1,62 @@
 package projectCode20280;
 
 public class ArrayQueue<E> implements Queue<E> {
+	public E[] data;
+	public int front=0;
+	public int size=0;
+	public int len=100;
+	
+	
+	public ArrayQueue() {
+		data=(E[]) new Object[len];
+	}
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		ArrayQueue<Integer> que = new ArrayQueue<Integer>();
+		for(int i=0;i<5;i++)
+		que.enqueue(i);
+		
+		System.out.println("Size : "+que.size());
+		System.out.println("Top of queue : "+que.first());
+		System.out.println("Dequeue : "+que.dequeue());
+		System.out.println("Dequeue again : "+que.dequeue());
+		System.out.println("Size : "+que.size());
 
 	}
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		return size;
 	}
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		return (size==0);
 	}
 
 	@Override
 	public void enqueue(E e) {
-		// TODO Auto-generated method stub
+        if(size==len) System.out.println("Queue is full");
+        
+		data[size]=e;
+		size++;
 		
 	}
 
 	@Override
 	public E first() {
-		// TODO Auto-generated method stub
-		return null;
+		if(size<1) return null;
+		return data[0];
 	}
 
 	@Override
 	public E dequeue() {
-		// TODO Auto-generated method stub
-		return null;
+        if(isEmpty()) return null;
+		E ret= data[front];
+		data[front]=null;
+		size--;
+		front=front+1;
+		return ret;
 	}
 
 }
