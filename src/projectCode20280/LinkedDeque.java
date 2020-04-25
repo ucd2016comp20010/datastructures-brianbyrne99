@@ -1,6 +1,7 @@
 package projectCode20280;
 
 public class LinkedDeque<E> implements Deque<E> {
+	private DoublyLinkedList<E> list = new DoublyLinkedList<E>();
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -9,20 +10,17 @@ public class LinkedDeque<E> implements Deque<E> {
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		return list.size();
 	}
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		return list.isEmpty();
 	}
 
 	@Override
 	public E first() {
-		// TODO Auto-generated method stub
-		return null;
+		return list.get(0);
 	}
 
 	@Override
