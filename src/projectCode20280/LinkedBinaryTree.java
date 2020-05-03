@@ -1,5 +1,6 @@
 package projectCode20280;
 
+
 /**
  * Concrete implementation of a binary tree using a node-based, linked structure.
  */
@@ -221,7 +222,7 @@ public class LinkedBinaryTree<E extends Comparable<E>> extends AbstractBinaryTre
   public Position<E> addLeft(Position<E> p, E e)
                           throws IllegalArgumentException {
 	Node<E> parent= validate(p);
-	if(parent.getLeft()==null)
+	if(parent.getLeft()!=null)
 		throw new IllegalArgumentException("Left child already exists");
 	Node<E> child= createNode(e,parent,null,null);
 	size++;
@@ -241,7 +242,7 @@ public class LinkedBinaryTree<E extends Comparable<E>> extends AbstractBinaryTre
   public Position<E> addRight(Position<E> p, E e)
           throws IllegalArgumentException {
 	  Node<E> parent= validate(p);
-	  if(parent.getLeft()==null)
+	  if(parent.getLeft()!=null)
 		  throw new IllegalArgumentException("Right child already exists");
 	  Node<E> child= createNode(e,parent,null,null);
 	  size++;
@@ -333,12 +334,35 @@ public class LinkedBinaryTree<E extends Comparable<E>> extends AbstractBinaryTre
 	return temp;
   }
   
+  public void createLevelOrder(E [] arr)
+  {
+	  root = createLevelOrderHelper(arr , root, 0);
+	  
+  }
+  
+  private Node<E> createLevelOrderHelper(E [] arr, Node<E> p, int i)
+  {
+	  if(i < arr.length)   //a recusive function that organizes the nodes as they would be in the tree
+	  {
+		  Node<E> n = createNode(arr[i], p, null, null);
+		  n.left = createLevelOrderHelper(arr, n.left, 2*i + 1);
+		  n.right = createLevelOrderHelper(arr, n.right, 2*i + 2);
+		  size++;
+		  return n; 
+	  }
+	  return p;
+  }
+  
   public String toString() {
 	  StringBuilder sb = new StringBuilder();
 	  sb.append("[");
+	  int counter=0;
 	  for(Position<E> p : positions()) {
+		  if(counter > 0)
+			  sb.append(", ");
+		  
 		  sb.append(p.getElement());
-		  sb.append(", ");
+		  counter++;	  
 	  }
 	  sb.append("]");
 	  return sb.toString();
@@ -348,11 +372,15 @@ public class LinkedBinaryTree<E extends Comparable<E>> extends AbstractBinaryTre
 	  LinkedBinaryTree<Integer> bt = new LinkedBinaryTree<Integer>();
 	  
 	  int [] arr = {12, 25, 31, 58, 36, 42, 90, 62, 75};
-	  for(int i : arr) {
+	 /* for(int i : arr) {
 		  bt.insert(i);
-	  }
-	  System.out.println("bt: " + bt.size() + " " + bt );
+	  }*/
+	  Integer [] arr1 = new Integer[] {1,2,3,4,5,6,7,8,9,10,11,12};
+		bt.createLevelOrder(arr1); //test that fails passes in main
+	
+	  System.out.println("bt: " + bt.size() + " Out:" + bt );
 	  
   }
 } 
+
 
